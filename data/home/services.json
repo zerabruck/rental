@@ -1,0 +1,27 @@
+[
+    {
+        "id":1,
+        "icon":"first",
+        "title":"buy properties",
+        "information":"find latest real estate properties for sale. search by price,size and location"
+    },
+    
+    {
+        "id":2,
+        "icon":"second",
+        "title":"sell properties",
+        "information":"find latest real estate properties for sale. search by price,size and location"
+    },
+    {
+        "id":3,
+        "icon":"thrid",
+        "title":"buy properties",
+        "information":"find latest real estate properties for sale. search by price,size and location"
+    },
+    {
+        "id":4,
+        "icon":"thrid",
+        "title":"buy properties",
+        "information":"find latest real estate properties for sale. search by price,size and location"
+    }
+]
