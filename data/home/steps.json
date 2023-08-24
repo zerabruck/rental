@@ -1,0 +1,22 @@
+[
+    {
+        "id":1,
+        "url":"/img/home/steps/search-property.png",
+        "title":"1.serach property type",
+        "description":"Typically the propose of real estate deal is to provide for the transfer of the property to the desired person"
+    },
+
+    {
+        "id":2,
+        "url":"/img/home/steps/select-property-image.png",
+        "title":"1.serach property type",
+        "description":"Typically the propose of real estate deal is to provide for the transfer of the property to the desired person"
+    },
+
+    {
+        "id":3,
+        "url":"/img/home/steps/contact-owner-image.png",
+        "title":"1.serach property type",
+        "description":"Typically the propose of real estate deal is to provide for the transfer of the property to the desired person"
+    }
+]
