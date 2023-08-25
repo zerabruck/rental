@@ -5,7 +5,7 @@ import { HomeStep } from '../../../types/type'
 
 function Steps() {
   return (
-    <div className='bg-gray'>
+    <div className='bg-gray '>
         <div className='flex flex-col items-center justify-center text-center gap-5'>
             <p className='text-4xl font-bold capitalize'> How eaisy it <span className='text-primary'>works</span> for you</p>
             <p className='max-w-[30rem] text-light-text'>How does the real estate industry works? 
