@@ -10,7 +10,7 @@ const Interest:React.FC<HomeInterest> = ({url, id, propertyAmount, propertyType}
         </div>
         
             <p className='font-semibold text-dark-text'>{propertyType}</p>
-            <button className="border-2 border-light-text/[.25] rounded-lg px-3 py-2 w-fit">{propertyAmount} <span className='text-light-text'> properties</span></button>
+            <button className="animate-pulse  border-2 border-light-text/[.25] rounded-lg px-3 py-2 w-fit">{propertyAmount} <span className='text-light-text'> properties</span></button>
         
     </div>
   )

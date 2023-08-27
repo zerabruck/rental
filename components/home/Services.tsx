@@ -5,7 +5,7 @@ import { HomeService } from '../../types/type'
 
 function Services() {
   return (
-    <div  className='bg-gray mx-8 rounded-2xl mt-6 '>
+    <div  className='bg-gray sm:mx-8 rounded-2xl sm:mt-6 py-12 '>
         <div className='flex justify-between max-md:flex-col md:items-end md:mx-28 p-6 pt-8'>
           <div>
         <p className='text-primary font-semibold'>EHM,SO?</p>
@@ -13,7 +13,7 @@ function Services() {
         <p className='text-light-text capitalize'>full-service agents,modern technology</p>
           </div>
           <div>
-            <button className='bg-primary-light px-4 py-2 text-primary rounded-xl font-semibold hover:shadow-md'>See more</button>
+            <button className=' bg-primary-light px-4 py-2 text-primary rounded-xl font-semibold hover:shadow-md'>See more</button>
           </div>
         </div>
         <div className='flex max-md:flex-col   justify-center gap-2 mx-3  '>

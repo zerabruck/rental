@@ -14,5 +14,6 @@ export interface HomeStep{
     id:number,
     url:string,
     title:string,
-    description:string
+    description:string,
+    backGroundColor:string
 }
