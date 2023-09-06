@@ -17,3 +17,18 @@ export interface HomeStep{
     description:string,
     backGroundColor:string
 }
+export interface House{
+    id:string,
+    name:string,
+    address:string,
+    coverPhotoUrl:string,
+    picturesUrl:string[]
+    description:string,
+    houseType:string,
+    numberOfBathrooms:number,
+    numberOfBedrooms:number,
+    propertySize:number,
+    price:number,
+    userId:string,
+    wantTo:string
+}
