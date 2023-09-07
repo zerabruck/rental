@@ -59,7 +59,6 @@ const UpdateHouseForm = ({houseData, setDisplay}:{houseData:House, setDisplay: S
         }).catch(err =>{
             console.error(err)
             setErrorMessage(err.message)
-
             return ''
         })
         if (url){

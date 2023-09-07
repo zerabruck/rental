@@ -32,3 +32,10 @@ export interface House{
     userId:string,
     wantTo:string
 }
+export interface User{
+    name:string,
+    email:string,
+    phoneNumber:string,
+    profilePicture:string,
+    userId:string
+}
