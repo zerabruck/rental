@@ -4,12 +4,17 @@ import { collection, query, where, getDocs, doc, deleteDoc } from "firebase/fire
 import { House } from '@/types/type'
 import HouseCard from '../common/HouseCard'
 import UpdateHouseForm from './UpdateHouseForm'
+import { useSelector } from 'react-redux'
+import { RootState } from "@/store";
+
 export const Properties:React.FC = () => {
     const [houses, setHouses] = useState<House[]>([])
     const [display, setDisplay] = useState('')
+    const user = useSelector((state: RootState) =>state.auth.user )
     useEffect(() => {
       const fetchData = async () => {
-        const q = query(collection(db, 'houses'), where('userId', '==', 'test'));
+
+        const q = query(collection(db, 'houses'), where('userId', '==', user));
         try {
           const querySnapshot = await getDocs(q);
           const houses= querySnapshot.docs.map((doc) => ({
@@ -22,12 +27,11 @@ export const Properties:React.FC = () => {
         }
       };
         fetchData(); 
-      }, []);
+      }, [display]);
       const removeHouse = async(houseId:string) =>{
         try{
           const documentRef = doc(db,'houses',houseId)
           await  deleteDoc(documentRef)
-          // fetchData()
         }
         catch(err){
           console.log(err)
@@ -44,8 +48,8 @@ export const Properties:React.FC = () => {
                 <div className={`${display !== '' && "hidden" }`}>
                 <HouseCard housedata = {house}   />
                 <div className='flex justify-between bg-white'>
-                <button  onClick={() => setDisplay(house.id)} className='w-1/2 border-b-2 rounded-es-lg  hover:bg-gray border-[#EEEE]'>Edit</button>
-                <button  onClick={() => removeHouse(house.id)} className=' w-1/2 border-b-2 rounded-ee-lg  hover:bg-red-500 hover:text-red-100 border-[#EEEE]'>Delete</button>
+                <button  onClick={() => setDisplay(house.id)} className='w-1/2 border-2 border-t-0 border-r-0 rounded-es-lg  hover:bg-gray border-[#EEEE]'>Edit</button>
+                <button  onClick={() => removeHouse(house.id)} className=' w-1/2 border-2 border-t-0 rounded-ee-lg  hover:bg-red-500 hover:text-red-100 border-[#EEEE]'>Delete</button>
 
                 </div>
 

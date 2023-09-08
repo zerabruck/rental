@@ -3,6 +3,8 @@ import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import { storage, db} from '@/config/firebase'
 import {collection, addDoc} from "firebase/firestore"
 import Image from 'next/image'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 const CreateHouseForm = () => {
     const [pictures, setPictures] = useState<File[]>([])
@@ -18,6 +20,7 @@ const CreateHouseForm = () => {
     const [price, setPrice] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [successVisible, setSuccessVisible] = useState(false)
+    const user = useSelector((state:RootState) => state.auth.user)
 
     const hideMessage = () =>{
         setSuccessVisible(false)
@@ -81,7 +84,7 @@ const CreateHouseForm = () => {
             
             const collectionRef = collection(db,"houses")
             await addDoc(collectionRef,{
-                userId:'test1',
+                userId:user,
                 name:name,
                 address:address,
                 description:description,

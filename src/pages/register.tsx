@@ -8,6 +8,7 @@ import Image from 'next/image';
 import {FcGoogle} from "react-icons/fc"
 import {SiGithub} from "react-icons/si"
 import firebase from 'firebase/app';
+import { useRouter } from 'next/router';
 const register = () => {
     const [userEmail, setUserEmail] = useState('')
     const [userPhoneNumber, setUserPhoneNumber] = useState('')
@@ -16,16 +17,17 @@ const register = () => {
     const [confirmPassword, setconfirmPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const dispatch = useDispatch()
+    const router = useRouter()
 
     const registerUser = async(event: React.FormEvent<HTMLFormElement>) =>{
         event.preventDefault()
         setErrorMessage('')
         if (confirmPassword === userPassword){
 
-            createUserWithEmailAndPassword(auth, userEmail, userPassword).then((res) =>{
+            await createUserWithEmailAndPassword(auth, userEmail, userPassword).then(async(res) =>{
                 console.log(res.user.uid)
                 dispatch(setUser(res.user.uid))
-                setDoc(doc(db, "users", res.user.uid),{
+                await setDoc(doc(db, "users", res.user.uid),{
                     name:userName,
                     phoneNumber:userPhoneNumber,
                     email:userEmail,
@@ -34,6 +36,7 @@ const register = () => {
                 }).catch((err) =>{
                     console.error(err)
                 })
+                router.push('/dashboard')
     
             }).catch((err:firebase.FirebaseError) =>{
                 setErrorMessage(err.message.slice(9))

@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
-import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
+import {ref, uploadBytes, getDownloadURL, deleteObject} from 'firebase/storage'
 import { storage, db} from '@/config/firebase'
 import {doc, updateDoc} from "firebase/firestore"
 import Image from 'next/image'
 import { House } from '@/types/type'
+
 type SetStateFunction<T> = (prevState: T | ((prevState: T) => T)) => void;
 
 const UpdateHouseForm = ({houseData, setDisplay}:{houseData:House, setDisplay: SetStateFunction<string>}) => {
@@ -41,7 +42,14 @@ const UpdateHouseForm = ({houseData, setDisplay}:{houseData:House, setDisplay: S
     const handlePicturesDelete = (picture :File) =>{
         setPictures(prevpics => prevpics.filter((prevpic => prevpic !== picture )))
     }
-    const handlePrevPicturesDelete = (picture:string) =>{
+    const imageRemoteDelete = async(picture:string) => {
+        const imageRef = ref(storage, picture) 
+                await deleteObject(imageRef).catch((error) => {
+                    console.log(error)
+                });
+    }
+    const handlePrevPicturesDelete = async (picture:string) =>{
+        imageRemoteDelete(picture)
         setPrevPictures(prevpics => prevpics.filter((prevpic) => prevpic !== picture))
     }
     const submitImage = async(image:File | null) =>{
@@ -77,6 +85,7 @@ const UpdateHouseForm = ({houseData, setDisplay}:{houseData:House, setDisplay: S
         let imageUrl = ''
         if (coverPhoto !== null){
             imageUrl = await submitImage(coverPhoto)
+            imageRemoteDelete(houseData.coverPhotoUrl)
         }
             const uploadedPicturesUrls = [];
             for (const image of pictures) {
@@ -85,7 +94,7 @@ const UpdateHouseForm = ({houseData, setDisplay}:{houseData:House, setDisplay: S
                 uploadedPicturesUrls.push(url);
                 }
             }
-            
+            console.log(uploadedPicturesUrls)
             
             const docRef = doc(db,"houses",id)
             await updateDoc(docRef,{

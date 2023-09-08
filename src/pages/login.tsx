@@ -7,6 +7,7 @@ import { RootState } from "@/store";
 import Image from 'next/image';
 import {FcGoogle} from "react-icons/fc"
 import {SiGithub} from "react-icons/si"
+import { useRouter } from 'next/router';
 
 const login = () => {
     const [ userEmail, setUserEmail] = useState('')
@@ -14,6 +15,7 @@ const login = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const user = useSelector((state: RootState) =>state.auth.user )
     const dispatch = useDispatch()
+    const router = useRouter()
     
     const loginUser = (event: React.FormEvent<HTMLFormElement>) =>{
         event.preventDefault()
@@ -21,6 +23,7 @@ const login = () => {
         signInWithEmailAndPassword(auth, userEmail, userPassword).then((response) =>{
             dispatch(setUser(response.user.uid))
             console.log(response.user.uid)
+            router.push('/dashboard')
         }).catch((err) =>{
             setErrorMessage('Sorry, we could not find an account with the provided email and password. Please verify your credentials and try again.')
         })
@@ -71,7 +74,7 @@ const login = () => {
 
         </div>
         </div>
-        <div className='md:w-[50%] flex justify-center items-center md:h-[90vh] '>
+        <div className='md:w-[50%] flex justify-center items-center md:h-[100vh] '>
 
         <div className="relative md:w-[60%] md:h-[60vh] max-md:hidden">
         <Image fill alt='sign in image' src='/img/signin.png' />

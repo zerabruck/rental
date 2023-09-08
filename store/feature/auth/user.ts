@@ -3,7 +3,7 @@ export interface user {
     user:string ;
 }
 const initialState: user = {
-    user: 'HoMz2QXJ3GO8dFnc2HWUIuafmCp1', 
+    user: '', 
 };
 const authSlice = createSlice({
     name: 'auth',
