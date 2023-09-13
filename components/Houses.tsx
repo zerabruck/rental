@@ -1,36 +1,63 @@
-import React from 'react'
-import {CiLocationOn} from 'react-icons/ci'
-
+import { House } from '@/types/type'
+import React, { useEffect, useState } from 'react'
+import { collection, query, where, getDocs, doc, deleteDoc } from "firebase/firestore"
+import { db } from '@/config/firebase'
+import Search from './Search'
+import HouseCard from './common/HouseCard'
+import { useRouter } from 'next/router'
 const Houses = () => {
-  return (
-    <div className='m-12'>
-        <div>
-            <div className='bg-gray flex  w-fit rounded-xl  '>
-                <button className='px-5 border-2 py-3 rounded-xl'>sell</button>
-                <button className='px-5 py-3'>rent</button>
-            </div>
-            <div>
-                <CiLocationOn />
-                <input placeholder='search by location' />
-            </div>
-        </div>
+  const [houseData, setHouseData] = useState<House[] | null>(null)
+  const [serachResult, setSearchResult] = useState<House[] | null>(null)
+  const router = useRouter()
+  useEffect(() => {
+    const fetchData = async () => {
 
-        <div>
-            <div>
-                <div>
-                    <CiLocationOn/>
-                    <p>Bedrooms</p>
-                </div>
-                <div>
-                <input type='number' />
-                <p>-</p>
-                <input type='number' />
-                </div>
-            </div>
-        </div>
+      const q = collection(db, 'houses')
+      try {
+        const querySnapshot = await getDocs(q);
+        const houses= querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as House[];
+        setHouseData(houses)
+        // setSearchResult((prevSearchResult) => houses);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+      fetchData(); 
+    }, []);
+    console.log(houseData)
+    const houseClickHandler = (id:string) =>{
+      router.push(`/house/${id}`)
 
-    </div>
-  )
+
+    }
+    if (houseData ){
+
+      return (
+        <div>
+          <div className=' max-w-[1200px] min-h-screen m-auto'>
+            <Search data = {houseData} result = {setSearchResult} />
+            <div  className='flex flex-wrap max-md:justify-center justify-between '>
+    
+            {
+              houseData?.map((house) =>{
+                return(
+                  <div key={house.id} className='m-2 md:w-[30%] sm:w-[40%] w-[80%] rounded-b-xl' onClick={() => houseClickHandler(house.id)}>             
+                    <HouseCard housedata = {house}   />
+                  </div>
+                )
+              })
+            }
+            </div>
+    
+    
+          </div>
+    
+        </div>
+      )
+    }
 }
 
 export default Houses

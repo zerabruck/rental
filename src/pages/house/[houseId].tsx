@@ -57,7 +57,8 @@ const house = () => {
         )
     }
 
-    if (houseData){
+    if (houseData ){
+        console.log(posterAccount)
 
         return (
             
