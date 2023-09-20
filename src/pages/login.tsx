@@ -59,7 +59,7 @@ const login = () => {
             </div>
             <div className='mb-7'>
             <label>Password</label>
-            <input required className='block w-full pt-3 border-b outline-none focus:border-b-primary border-[#EEEEEE]'  type='text' value={userPassword} onChange={(e: ChangeEvent<HTMLInputElement>) =>{setUserPassword(e.target.value)}} />
+            <input  required className='block w-full pt-3 border-b outline-none focus:border-b-primary border-[#EEEEEE]'  type='password' value={userPassword} onChange={(e: ChangeEvent<HTMLInputElement>) =>{setUserPassword(e.target.value)}} />
 
             </div>
             
