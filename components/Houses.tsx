@@ -5,6 +5,7 @@ import { db } from '@/config/firebase'
 import Search from './Search'
 import HouseCard from './common/HouseCard'
 import { useRouter } from 'next/router'
+import Loading from './common/Loading'
 const Houses = () => {
   const [houseData, setHouseData] = useState<House[] | null>(null)
   const [serachResult, setSearchResult] = useState<House[] | null>(null)
@@ -58,6 +59,9 @@ const Houses = () => {
     
         </div>
       )
+    }
+    else{
+      <Loading/>
     }
 }
 

@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import { db } from '@/config/firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { House, User } from '@/types/type'
+import Loading from '@/components/common/Loading'
 const house = () => {
     const router = useRouter()
     const houseId = router.query?.houseId as string
@@ -133,7 +134,7 @@ const house = () => {
     } else{
         return (
             <div>
-                loading
+                <Loading/>
             </div>
         )
     }

@@ -90,10 +90,12 @@ const Search: React.FC<SearchProps> = ({ data, result }) => {
         if (result_query.houseType && result_query.houseType !== 'all'){
             search_result = search_result.filter(result => result.houseType === result_query.houseType)
         }
+        console.log(search_result)
+        console.log(result_query.houseType)
+
+        
         
         result(search_result)
-        // console.log(search_result)
-        // console.log(data)
 
     }
   return (
@@ -116,9 +118,6 @@ const Search: React.FC<SearchProps> = ({ data, result }) => {
                 <input name='location' onChange={(e) => changeHandler(e)} placeholder='search by location' className=' bg-gray border-2 border-l-0 rounded-l-none border-gray outline-none  rounded-xl py-2 placeholder:capitalize w-full' />
             </div>
         </div>
-        {/* rent:false,
-        sell:false,
-        houseType:'all', */}
 
         <div className='flex bg-gray p-4 my-5 justify-evenly flex-wrap rounded-xl'>
             <div className=''>

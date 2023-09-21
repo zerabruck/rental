@@ -5,6 +5,7 @@ import {collection, addDoc} from "firebase/firestore"
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
+import Loading from '../common/Loading'
 
 const CreateHouseForm = () => {
     const [pictures, setPictures] = useState<File[]>([])
@@ -21,6 +22,7 @@ const CreateHouseForm = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [successVisible, setSuccessVisible] = useState(false)
     const user = useSelector((state:RootState) => state.auth.user)
+    const [loading, setLoading] = useState(false)
 
     const hideMessage = () =>{
         setSuccessVisible(false)
@@ -70,6 +72,7 @@ const CreateHouseForm = () => {
     }
     const submitHandler = async(event: React.FormEvent<HTMLFormElement>) =>{
         event.preventDefault()
+        setLoading(true)
         if (coverPhoto !== null){
             setErrorMessage('')
             const imageUrl = await submitImage(coverPhoto)
@@ -98,6 +101,7 @@ const CreateHouseForm = () => {
                 picturesUrl:uploadedPicturesUrls
             }).then(res =>{
                 console.log('done')
+                setLoading(false)
                 setSuccessVisible(true)
                 setPictures([])
                 setCoverPhoto(null)
@@ -129,6 +133,9 @@ const CreateHouseForm = () => {
           </p>
         }
         <form onSubmit={submitHandler}>
+            {
+                loading && <Loading/>
+            }
             <div className='px-12 py-4 max-sm:px-2'>
             {
                 errorMessage && 

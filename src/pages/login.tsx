@@ -8,6 +8,7 @@ import Image from 'next/image';
 import {FcGoogle} from "react-icons/fc"
 import {SiGithub} from "react-icons/si"
 import { useRouter } from 'next/router';
+import Loading from '@/components/common/Loading';
 
 const login = () => {
     const [ userEmail, setUserEmail] = useState('')
@@ -16,9 +17,11 @@ const login = () => {
     const user = useSelector((state: RootState) =>state.auth.user )
     const dispatch = useDispatch()
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
     
     const loginUser = (event: React.FormEvent<HTMLFormElement>) =>{
         event.preventDefault()
+        setLoading(true)
         setErrorMessage('')
         signInWithEmailAndPassword(auth, userEmail, userPassword).then((response) =>{
             dispatch(setUser(response.user.uid))
@@ -38,12 +41,15 @@ const login = () => {
                 <button className='border border-[#EEEEEE] px-4 py-3 rounded-[2rem] bg-gray flex justify-center items-center gap-2'> <FcGoogle size = {22}/> sign up with Google</button>
                 <button className='border border-[#EEEEEE] px-4 py-3 rounded-[2rem] bg-gray flex justify-center items-center gap-2'><SiGithub/> sign up with Github</button>
             </div>
-
+            {
+                loading ? <Loading/>:
             <div className='flex items-center justify-between py-9'>
                 <div className="h-[.5px] w-[35%] border border-[#EEEEEE] "></div>
                 <p className="text-gray-500">or use Email</p>
                 <div className="h-[1px] w-[35%] border border-[#EEEEEE] "></div>
             </div>
+            }
+
             {
                 errorMessage && 
             <div className='mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded'>
@@ -64,13 +70,13 @@ const login = () => {
             </div>
             
             <div className=' self-end'>
-            <button type='submit' className='bg-primary px-10 py-4 text-white uppercase rounded-[2rem] shadow-[0_15px_20px_-15px_rgba(81,57,237,.5)]'>Sign in</button>
+            <button type='submit' className='bg-primary px-10 py-4 text-white uppercase rounded-[2rem] shadow-[0_15px_20px_-15px_rgba(81,57,237,.5)]'>Sign in  </button>
 
             </div>
             </form>
             
             
-            <p className="self-center my-4 ">Don't have an Account?<span className='font-bold'>Sign in</span></p>
+            <p className="self-center my-4 ">Don't have an Account?<span className='font-bold'>Register</span></p>
 
         </div>
         </div>

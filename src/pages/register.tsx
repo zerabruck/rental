@@ -9,6 +9,7 @@ import {FcGoogle} from "react-icons/fc"
 import {SiGithub} from "react-icons/si"
 import firebase from 'firebase/app';
 import { useRouter } from 'next/router';
+import Loading from '@/components/common/Loading';
 const register = () => {
     const [userEmail, setUserEmail] = useState('')
     const [userPhoneNumber, setUserPhoneNumber] = useState('')
@@ -16,10 +17,13 @@ const register = () => {
     const [userPassword, setUserPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
+    const [loading, setLoading] = useState(false)
+
     const dispatch = useDispatch()
     const router = useRouter()
 
     const registerUser = async(event: React.FormEvent<HTMLFormElement>) =>{
+        setLoading(true)
         event.preventDefault()
         setErrorMessage('')
         if (confirmPassword === userPassword){
@@ -56,11 +60,14 @@ const register = () => {
                 <button className='border border-[#EEEEEE] px-4 py-3 rounded-[2rem] bg-gray flex justify-center items-center gap-2'><SiGithub/> sign up with Github</button>
             </div>
 
+            {
+                loading ? <Loading/>:
             <div className='flex items-center justify-between py-9'>
                 <div className="h-[.5px] w-[35%] border border-[#EEEEEE] "></div>
                 <p className="text-gray-500">or use Email</p>
                 <div className="h-[1px] w-[35%] border border-[#EEEEEE] "></div>
             </div>
+            }
             {
                 errorMessage && 
             <div className='mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded'>
