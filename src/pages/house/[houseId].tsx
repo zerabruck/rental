@@ -90,7 +90,7 @@ const house = () => {
                       <Image className='object-cover rounded-full hover:scale-125 transition duration-500' src={posterAccount.profilePicture} alt="house detail" fill />
                        </div>:
                        <div className=' flex justify-center items-center rounded-full w-[5rem] h-[5rem] overflow-hidden'>
-                       <p className='text-xl font-bold'>{posterAccount?.name[0]}</p>
+                       <p className='text-xl font-bold'>user</p>
                         </div>
 
                         } 
